@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seek4Job</title>
+  <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body class="signup-body">
+    <h1 class="signin-h1">Welcome to Seek4Job!</h1>
+    <img src="images/logo.png" alt="Logo" class="logo1-img">
+    <h1 class="signup-h1">Create new account</h1>
+    <p class="signup-p">Already have an account?
+        <a href="index.html" class="signin-link">Sign In</a>
+    </p>
+
+    <form id="signupForm" class="signin_signup-form">
+        <input type="text" id="name" name="name" placeholder="Name" required>
+
+        <input type="email" id="signupEmail" name="email" placeholder="Email" required>
+
+        <input type="password" id="signupPassword" name="password" placeholder="Password" required>
+
+        <input type="date" id="dob" name="dob" placeholder="Date of Birth" required>
+
+        <div class="checkbox-container">
+            <label>
+                <input type="checkbox" name="updates" required>
+                Email me with news and updates
+            </label>
+
+            <label style="display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="terms" required>
+                <span style="white-space: nowrap;">
+                    By signing up, you agree to our 
+                    <span class="bold-underline">Terms of Service</span> and 
+                    <span class="bold-underline">Privacy Policy</span>.
+                </span>
+            </label>
+        </div>
+
+        <button type="submit" class="createaccount-btn">Create Account</button>
+    </form>
+    <script src="JS/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seek4Job</title>
+  <link rel="stylesheet" href="CSS/jobseeker_style.css">
+</head>
+
+<body class="nav-body">
+  <nav class="top-nav">
+    <div class="left-area">
+      <img src="images/logo.png" alt="Logo" class="logo-img">
+    </div>
+
+    <ul class="center-menu">
+      <li><a href="jobseeker_aboutus.html">About Us</a></li>
+      <li><a href="#" class="active">Dashboard</a></li>
+      <li><a href="jobseeker_profile.html">Profile</a></li>
+      <li><a href="courses-learningmodules.html">Courses</a></li> 
+      <li><a href="mentorship-community.html">Community</a></li>
+    </ul>
+
+    <button class="name-btn" id="nameBtn">Name</button>
+  </nav>
+
+  <div class="dashboard-container">
+
+    <div class="horizontal-menu">
+      <ul class="menu-list-horizontal">
+        <li onclick="location.href='jobseeker_dashboard.html'">Overview</li>
+        <li class="active">Jobs Search</li>
+        <li onclick="location.href='saved_jobs.html'">Saved Jobs</li>
+        <li onclick="location.href='apply_job.html'">Apply Job</li>
+        <li onclick="location.href='view_applied_jobs.html'">View Applied Jobs</li>
+        <li onclick="location.href='jobseeker_notification_messages.html'">Notification & Messages</li>
+      </ul>
+    </div>
+
+  <div class="content-area"> 
+
+    <div class="main-content dashboard-container">
+    <h1 class="page-title">Jobs Searching</h1>
+
+    <!-- SEARCH BAR -->
+    <div class="dashboard-search-section">
+      <input 
+        type="text" 
+        id="searchInput" 
+        class="dashboard-search-box"
+        placeholder="Insert job title or location you want..."
+      >
+      <button class="dashboard-search-btn" id="searchBtn">Search</button>
+    </div>
+
+    <!-- FILTER ROW -->
+    <div class="filter-row">
+      <select id="salaryFilter" class="dashboard-filter">
+        <option value="">Salary Range</option>
+        <option>RM 0 - RM 1500</option>
+        <option>RM1501 - RM 3000</option>
+        <option>RM4001 - RM 6500</option>
+        <option>RM6501 - RM 8000</option>
+        <option>>RM 8000</option>
+      </select>
+
+      <select id="locationFilter" class="dashboard-filter">
+        <option value="">All Locations</option>
+        <option>Remote</option>
+        <option>On-site</option>
+        <option>Hybrid</option>
+      </select>
+
+      <select id="typeFilter" class="dashboard-filter">
+        <option value="">Job Type</option>
+        <option>Full-time</option>
+        <option>Part-time</option>
+        <option>Contract</option>
+        <option>Temporary</option>
+        <option>Internship</option>
+      </select>
+
+     <select id="sortFilter" class="dashboard-filter">
+        <option value="latest">Sort by Latest</option>
+        <option value="oldest">Sort by Oldest</option>
+      </select>
+    </div>
+
+    <h2 class="section-title">Jobs recommended</h2>
+
+    <!-- Job Cards Grid -->
+    <div class="jobs-grid">
+
+      <!-- Card 1 -->
+      <div class="job-card">
+        <div class="card-tags">
+          <span class="tag urgently">Urgently Hiring</span>
+          <span class="tag urgently">Posted 2 weeks ago</span>
+          <span class="posted-date" style="display:none;">2025-10-20</span>
+        </div>
+        <h3><a href="business_analyst.pdf" class="applicant-link"><strong>Business Analyst</strong></a></h3>
+        <div class="job-location">Subang Jaya</div>
+        <div class="job-badges">
+          <span class="badge">RM 4500 per month</span>
+          <span class="badge">Remote</span>
+          <span class="badge">Full-time</span>
+          <span class="badge">Flexible Schedule</span>
+          <span class="badge">Opportunities for Promotion</span>
+        </div>
+        <a href="apply_job.html" class="apply-btn">Apply Now</a>
+        <button onclick="location.href='saved_jobs.html'" class="save-btn">Save Job</button>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="job-card">
+        <div class="card-tags">
+          <span class="tag urgently">Urgently Hiring</span>
+          <span class="tag urgently">Posted 1 weeks ago</span>
+          <span class="posted-date" style="display:none;">2025-11-01</span>
+        </div>
+        <h3><a href="software_engineer.pdf" class="applicant-link"><strong>Software Engineer</strong></a></h3>
+        <div class="job-location">KLCC</div>
+        <div class="job-badges">
+          <span class="badge">RM 6000 per month</span>
+          <span class="badge">On-site</span>
+          <span class="badge">Full-time</span>
+          <span class="badge">Flexible Schedule</span>
+          <span class="badge">Opportunities for Promotion</span>
+        </div>
+        <a href="apply_job.html" class="apply-btn">Apply Now</a>
+        <button onclick="location.href='saved_jobs.html'" class="save-btn">Save Job</button>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="job-card">
+        <div class="card-tags">
+          <span class="tag urgently">Newly Posted</span>
+          <span class="tag urgently">Posted 3 days ago</span>
+          <span class="posted-date" style="display:none;">2025-11-20</span>
+        </div>
+        <h3><a href="devops.pdf" class="applicant-link"><strong>DevOps</strong></a></h3>
+        <div class="job-location">TRX Exchange Mall</div>
+        <div class="job-badges">
+          <span class="badge">RM 8000 per month</span>
+          <span class="badge">Hybrid</span>
+          <span class="badge">Part-time</span>
+          <span class="badge">Flexible Schedule</span>
+          <span class="badge">Work from home once a week</span>
+        </div>
+        <a href="apply_job.html" class="apply-btn">Apply Now</a>
+        <button onclick="location.href='saved_jobs.html'" class="save-btn">Save Job</button>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="job-card">
+        <div class="card-tags">
+          <span class="tag urgently">Hired</span>
+          <span class="tag urgently">Posted 3 months ago</span>
+          <span class="posted-date" style="display:none;">2025-06-20</span>
+        </div>
+        <h3><a href="data_analyst.pdf" class="applicant-link"><strong>Data Analyst</strong></a></h3>
+        <div class="job-location">Bangsar South</div>
+        <div class="job-badges">
+          <span class="badge">RM 1500 per month</span>
+          <span class="badge">Contract</span>
+          <span class="badge">Remote</span>
+          <span class="badge">Opportunities for Promotion</span>
+        </div>
+        <a href="apply_job.html" class="apply-btn">Apply Now</a>
+        <button onclick="location.href='saved_jobs.html'" class="save-btn">Save Job</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-center">
+      <div class="footer-links">
+                <a href="jobseeker_helpcenter-contactus.html">Help Center & Contact Us</a>
+                <a href="jobseeker_feedback-reportissues.html">Feedback & Report Issue</a>
+      </div>
+      <p>&copy; 2025 Seek4Job. All rights reserved.</p>
+    </div>
+    <a href="index.html" class="logout-btn">Logout</a>
+  </footer>
+
+  <script src="JS/main.js"></script>
+  <script src="JS/jobseeker_script.js"></script>
+  <script src="JS/employer_script.js"></script>
+
+</body>
+</html>

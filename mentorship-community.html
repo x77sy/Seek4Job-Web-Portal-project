@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seek4Job</title>
+  <link rel="stylesheet" href="CSS/employer_style.css">
+</head>
+
+<body class="nav-body">
+
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="left-area">
+      <img src="images/logo.png" class="logo-img">
+    </div>
+
+    <ul class="center-menu">
+      <li><a href="employer_aboutus.html">About Us</a></li>
+      <li><a href="employer_dashboard.html">Dashboard</a></li>
+      <li><a href="employer_profile.html">Profile</a></li>
+    </ul>
+
+        <button class="name-btn" id="nameBtn">Name</button>
+  </nav>
+
+  <div class="dashboard-container">
+
+    <!-- Horizontal Menu -->
+    <div class="horizontal-menu">
+      <ul class="menu-list-horizontal">
+        <li onclick="location.href='employer_dashboard.html'">Overview</li>
+        <li onclick="location.href='post_job.html'">Post Job</li>
+        <li onclick="location.href='view_posted_job.html'">View Posted Job</li>
+        <li onclick="location.href='view_applicant.html'">View Applicant</li>
+        <li class="active">Notification & Messages</li>
+      </ul>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="main-content comms-container">
+
+      <h1 class="page-title">Inbox</h1>
+
+      <!-- Tabs -->
+      <div class="inbox-tabs">
+        <button class="tab-btn active" onclick="openTab(event, 'notifications')">Notifications</button>
+        <button class="tab-btn" onclick="openTab(event, 'messages')">Messages</button>
+      </div>
+
+      <!-- Notifications List -->
+      <div id="notifications" class="tab-content active-tab">
+        <div class="notif-card highlight">
+          <p><strong>New applicant!</strong> Sarah Lee has applied for <strong>Frontend Developer</strong>.</p><span class="notif-time">10 minutes ago</span>
+        </div>
+
+        <div class="notif-card">
+          <p><strong>Application withdrawn:</strong> Jason Tan withdrew his application for <strong>UI/UX Designer</strong>.</p><span class="notif-time">2 hours ago</span>
+        </div>
+
+        <div class="notif-card">
+          <p><strong>Job expiring soon:</strong> Your listing <strong>Marketing Executive</strong> will expire in 3 days.</p><span class="notif-time">Yesterday</span>
+        </div>
+
+        <div class="notif-card">
+          <p><strong>Profile updated:</strong> Amanda Lim updated her resume. You may want to review her new details.</p><span class="notif-time">2 days ago</span>
+        </div>
+      </div>
+
+      <!-- Messages -->
+      <div id="messages" class="tab-content">
+
+        <div class="notif-card highlight">
+          <p><strong>Sarah Lee:</strong> Hi, may I check if the interview can be scheduled next Monday?</p><span class="notif-time">1 hour ago</span>
+        </div>
+
+        <div class="notif-card">
+          <p><strong>John Wong:</strong> I have submitted the requested documents. Please let me know if anything else is needed.</p><span class="notif-time">Yesterday</span>
+        </div>
+
+        <div class="notif-card">
+          <p><strong>System:</strong> Your job posting <strong>Software Engineer</strong> has reached 100 views.</p><span class="notif-time">3 days ago</span>
+        </div>
+      </div>
+    </div>
+
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-center">
+      <div class="footer-links">
+        <a href="employer_helpcenter-contactus.html">Help Center & Contact Us</a>
+        <a href="employer_feedback-reportissues.html">Feedback & Report Issue</a>
+      </div>
+      <p>&copy 2025 Seek4Job. All rights reserved.</p>
+    </div>
+    <a href="index.html" class="logout-btn">Logout</a>
+  </footer>
+
+  <script src="JS/main.js"></script>
+  <script src="JS/employer_script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (location.search.includes("tab=messages")) {
+        const msgBtn = document.querySelectorAll('.tab-btn')[1];
+        openTab({ target: msgBtn }, 'messages');
+      }
+    });
+  </script>
+
+</body>
+</html>

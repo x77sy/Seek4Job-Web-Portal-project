@@ -1,0 +1,660 @@
+// Review posted job details
+function openReview() {
+
+  // Get values from form
+  let jobTitle = document.querySelector('input[placeholder="Full Stack Developer"]').value;
+  let location = document.querySelectorAll('select')[0].value;
+  let reside = document.querySelector('input[name="reside"]:checked').parentNode.innerText.trim();
+  let description = document.querySelector("textarea").value;
+
+  // Get values selections by group
+  let jobTypes = [...document.querySelectorAll('.job-type-group .chip.active')].map(x => x.innerText);
+  let schedule = [...document.querySelectorAll('.schedule-group .chip.active')].map(x => x.innerText);
+  let supplemental = [...document.querySelectorAll('.supplemental-group .chip.active')].map(x => x.innerText);
+  let benefits = [...document.querySelectorAll('.benefits-group .chip.active')].map(x => x.innerText);
+
+  // Select inputs
+  let showPayBy = document.querySelectorAll('select')[1].value;
+  let rate = document.querySelectorAll('select')[2].value;
+
+  // Pay range
+  let minPay = document.querySelectorAll('input[type="number"]')[0].value;
+  let maxPay = document.querySelectorAll('input[type="number"]')[1].value;
+
+  // Dropdown fields
+  let hires = document.querySelectorAll('select')[3].value;
+  let urgency = document.querySelectorAll('select')[4].value;
+
+  // Build Review Content
+  let reviewHTML = `
+    <div class="review-item"><strong>Job Title</strong>${jobTitle}</div>
+    <div class="review-item"><strong>Location Type</strong>${location}</div>
+    <div class="review-item"><strong>Reside Requirement</strong>${reside}</div>
+    <div class="review-item"><strong>Job Type</strong>${jobTypes.join(", ")}</div>
+    <div class="review-item"><strong>Schedule</strong>${schedule.join(", ")}</div>
+    <div class="review-item"><strong>Pay Range</strong>${minPay} - ${maxPay} (${rate})</div>
+    <div class="review-item"><strong>Supplemental Pay</strong>${supplemental.join(", ")}</div>
+    <div class="review-item"><strong>Benefits</strong>${benefits.join(", ")}</div>
+    <div class="review-item"><strong>Number of hires</strong>${hires}</div>
+    <div class="review-item"><strong>Hiring urgency</strong>${urgency}</div>
+    <div class="review-item"><strong>Job Description</strong>${description}</div>
+  `;
+
+  document.getElementById("reviewContent").innerHTML = reviewHTML;
+
+  // Show popup
+  document.getElementById("reviewModal").style.display = "flex";
+}
+
+// Avoid has empty field
+function validateAndReview(event) {
+    event.preventDefault(); // stop real submission
+
+    const form = document.getElementById("jobForm");
+
+    // Show built-in required validation
+    if (!form.checkValidity()) {
+        form.reportValidity(); 
+        return false; 
+    }
+
+    // If all required fields filled then show review details page
+    openReview();
+    return false;
+}
+
+// Close review details page
+function closeReview() {
+  document.getElementById("reviewModal").style.display = "none";
+}
+
+// Final submit
+function finalSubmit() {
+  closeReview();
+  alert("Job successfully submitted!");
+
+  // Redirect after submission
+  window.location.href = "view_posted_job.html";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".chip").forEach(chip => {
+        chip.addEventListener("click", () => {
+            chip.classList.toggle("active");
+        });
+    });
+});
+
+// Search and filter features
+document.addEventListener("DOMContentLoaded", () => {
+
+    // Detect which page we are on
+    const isApplicantsPage = document.querySelector(".applicant-link") !== null;
+    const isPostedJobsPage = document.querySelector(".posted-job-title") !== null;
+
+    // Common elements
+    const searchInput = document.getElementById("searchInput");
+    const searchBtn = document.getElementById("searchBtn");
+    const statusFilter = document.getElementById("statusFilter");
+    const sortFilter = document.getElementById("sortFilter");
+
+    // Page-specific filters
+    const jobFilter = document.getElementById("jobFilter"); 
+    const typeFilter = document.getElementById("typeFilter");
+    const locationFilter = document.getElementById("locationFilter");
+
+    const tableBody = document.querySelector("tbody");
+    const rows = [...tableBody.querySelectorAll("tr")];
+
+    // --- Helper: safe date parser for "22 Nov 2023" or "-" ---
+    function parseDate(text) {
+        if (!text) return 0;
+        const str = text.trim();
+        if (str === "-" || str === "") return 0;
+
+        // Expected format: "22 Nov 2023"
+        const parts = str.split(" ");
+        if (parts.length !== 3) {
+            // Fallback to Date() if unexpected format
+            const d = new Date(str);
+            return isNaN(d.getTime()) ? 0 : d.getTime();
+        }
+
+        const [dayStr, monStr, yearStr] = parts;
+        const day = parseInt(dayStr, 10);
+        const year = parseInt(yearStr, 10);
+
+        const months = {
+            jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+            jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11
+        };
+
+        const m = months[monStr.toLowerCase()];
+        if (m === undefined || isNaN(day) || isNaN(year)) {
+            const d = new Date(str);
+            return isNaN(d.getTime()) ? 0 : d.getTime();
+        }
+
+        return new Date(year, m, day).getTime();
+    }
+
+    // Main update function
+    function updateTable() {
+        // Always start from original rows
+        let filtered = [...rows];
+
+        const searchText = searchInput?.value.toLowerCase().trim() || "";
+        const selectedJob = jobFilter?.value.toLowerCase() || "";
+        const selectedStatus = statusFilter?.value.toLowerCase() || "";
+        const selectedType = typeFilter?.value.toLowerCase() || "";
+        const selectedLocation = locationFilter?.value.toLowerCase() || "";
+        const sortOption = sortFilter?.value || "";
+
+        // 🔍 Search (common)
+        if (searchText) {
+            filtered = filtered.filter(row =>
+                row.innerText.toLowerCase().includes(searchText)
+            );
+        }
+
+        // 🧑‍💼 Applicants Page Filters
+        if (isApplicantsPage) {
+
+            // Job filter
+            if (selectedJob) {
+                filtered = filtered.filter(row => {
+                    const job = row.querySelector(".job-subtitle")?.innerText.toLowerCase();
+                    return job === selectedJob;
+                });
+            }
+
+            // Status filter
+            if (selectedStatus) {
+                filtered = filtered.filter(row => {
+                    const status = row.querySelector(".status")?.innerText.toLowerCase();
+                    return status === selectedStatus;
+                });
+            }
+
+            // Sort by applied date (col index 3)
+            filtered.sort((a, b) => {
+                const dateA = parseDate(a.children[3].innerText);
+                const dateB = parseDate(b.children[3].innerText);
+
+                if (sortOption === "latest") return dateB - dateA;
+                if (sortOption === "oldest") return dateA - dateB;
+                return 0;
+            });
+        }
+
+        // 📄 Posted Job Page Filters
+        if (isPostedJobsPage) {
+
+            // Type
+            if (selectedType) {
+                filtered = filtered.filter(row => {
+                    const subtitle = row.querySelector(".job-subtitle")?.innerText.toLowerCase();
+                    return subtitle.includes(selectedType);
+                });
+            }
+
+            // Status
+            if (selectedStatus) {
+                filtered = filtered.filter(row => {
+                    const status = row.querySelector(".status")?.innerText.toLowerCase();
+                    return status === selectedStatus;
+                });
+            }
+
+            // Location
+            if (selectedLocation) {
+                filtered = filtered.filter(row => {
+                    const subtitle = row.querySelector(".job-subtitle")?.innerText.toLowerCase();
+                    return subtitle.includes(selectedLocation);
+                });
+            }
+
+            // Sorting
+            filtered.sort((a, b) => {
+                const dateA = parseDate(a.children[2].innerText); // "Date Posted" col
+                const dateB = parseDate(b.children[2].innerText);
+
+                const applicantsA = parseInt(a.children[3].innerText) || 0;
+                const applicantsB = parseInt(b.children[3].innerText) || 0;
+
+                switch (sortOption) {
+                    case "latest": 
+                        return dateB - dateA;
+                    case "oldest": 
+                        return dateA - dateB;
+                    case "high": 
+                        return applicantsB - applicantsA;
+                    case "low": 
+                        return applicantsA - applicantsB;
+                    default: 
+                        return 0;
+                }
+            });
+        }
+
+        // Render updated rows
+        tableBody.innerHTML = "";
+        filtered.forEach(row => tableBody.appendChild(row));
+    }
+
+    // Safe listener wrapper
+    const addListener = (el, event) => {
+        if (el) el.addEventListener(event, updateTable);
+    };
+
+    // Attach events
+    addListener(searchBtn, "click");
+    addListener(searchInput, "input");
+    addListener(jobFilter, "change");
+    addListener(statusFilter, "change");
+    addListener(typeFilter, "change");
+    addListener(locationFilter, "change");
+    addListener(sortFilter, "change");
+});
+
+// Tab Switching
+function openTab(evt, tabId) {
+  document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+  document.getElementById(tabId).style.display = 'block';
+
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  evt.target.classList.add('active');
+}
+
+// Company Details
+document.getElementById('companyTab').style.display = 'block';
+
+// Logo update and remove
+const upload = document.getElementById('logoUpload');
+const logoBox = document.getElementById('companyLogo');
+
+if (upload) {
+  upload.addEventListener('change', function () {
+    const file = upload.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        logoBox.style.backgroundImage = `url(${reader.result})`;
+        logoBox.style.backgroundSize = "cover";
+        logoBox.style.backgroundPosition = "center";
+        logoBox.textContent = "";
+        localStorage.setItem("companyLogo", reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+}
+
+function removeLogo() {
+  logoBox.style.backgroundImage = "none";
+  logoBox.textContent = "Logo";
+  localStorage.removeItem("companyLogo");
+}
+
+// Save company details
+const companyInputs = document.querySelectorAll(
+  '#companyTab input, #companyTab select, #companyTab textarea'
+);
+const saveCompanyBtn = document.getElementById('saveCompanyBtn');
+const companySummary = document.getElementById('companySummary');
+const industrySelect = document.getElementById('companyIndustry');
+const sizeSelect = document.getElementById('companySize');
+
+if (saveCompanyBtn) {
+  saveCompanyBtn.addEventListener('click', () => {
+    const companyData = {};
+
+    companyInputs.forEach(field => {
+      const label = field.previousElementSibling?.textContent;
+      if (!label) return;
+      companyData[label] = field.value;
+    });
+
+    localStorage.setItem("companyInfo", JSON.stringify(companyData));
+    alert("Company details saved successfully!");
+
+    if (industrySelect && sizeSelect && companySummary) {
+      const industry = industrySelect.value || "Industry";
+      const size = sizeSelect.value || "Company size";
+      companySummary.textContent = `${industry} | ${size}`;
+    }
+
+    companyInputs.forEach(field => {
+      if (field.tagName === "SELECT") return;
+      field.placeholder = field.value || field.placeholder;
+      field.value = "";
+    });
+  });
+}
+
+// Save recruitment preferences
+const recruitInputs = document.querySelectorAll(
+  '#recruitTab input, #recruitTab select, #recruitTab textarea'
+);
+const saveRecruitBtn = document.getElementById('saveRecruitBtn');
+
+if (saveRecruitBtn) {
+  saveRecruitBtn.addEventListener('click', () => {
+    const recruitData = {};
+
+    recruitInputs.forEach(field => {
+      const label = field.previousElementSibling?.textContent;
+      if (!label) return;
+      recruitData[label] = field.value;
+    });
+
+    localStorage.setItem("recruitPrefs", JSON.stringify(recruitData));
+    alert("Recruitment preferences saved successfully!");
+
+    recruitInputs.forEach(field => {
+      if (field.tagName === "SELECT") return;
+      field.placeholder = field.value || field.placeholder;
+      field.value = "";
+    });
+  });
+}
+
+// Save account settings 
+const accountEmailInput = document.getElementById('accountEmail');
+const accountPhoneInput = document.getElementById('accountPhone');
+const notifyApplicants = document.getElementById('notifyApplicants');
+const notifyMessages = document.getElementById('notifyMessages');
+const notifySystem = document.getElementById('notifySystem');
+const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+
+if (saveSettingsBtn) {
+  saveSettingsBtn.addEventListener('click', () => {
+    const settings = {
+      email: accountEmailInput.value,
+      phone: accountPhoneInput.value,
+      notifyApplicants: notifyApplicants.checked,
+      notifyMessages: notifyMessages.checked,
+      notifySystem: notifySystem.checked
+    };
+
+    localStorage.setItem("accountSettings", JSON.stringify(settings));
+    alert("Account settings saved successfully!");
+
+    if (accountEmailInput.value) {
+      accountEmailInput.placeholder = accountEmailInput.value;
+      accountEmailInput.value = "";
+    }
+    if (accountPhoneInput.value) {
+      accountPhoneInput.placeholder = accountPhoneInput.value;
+      accountPhoneInput.value = "";
+    }
+  });
+}
+
+// Save account passowrd
+const newPasswordInput = document.getElementById('newPassword');
+const confirmPasswordInput = document.getElementById('confirmPassword');
+const savePasswordBtn = document.getElementById('savePasswordBtn');
+
+if (savePasswordBtn) {
+  savePasswordBtn.addEventListener('click', () => {
+    const pass1 = newPasswordInput.value;
+    const pass2 = confirmPasswordInput.value;
+
+    if (!pass1 || !pass2) {
+      alert("Please fill in both password fields.");
+      return;
+    }
+    if (pass1 !== pass2) {
+      alert("Passwords do not match.");
+      return;
+    }
+    if (pass1.length < 6) {
+      alert("Password should be at least 6 characters.");
+      return;
+    }
+
+    localStorage.setItem("accountPassword", pass1);
+    alert("Password updated successfully!");
+
+    newPasswordInput.value = "";
+    confirmPasswordInput.value = "";
+  });
+}
+
+// Load saved data 
+window.addEventListener('load', () => {
+  const savedLogo = localStorage.getItem("companyLogo");
+  if (savedLogo) {
+    logoBox.style.backgroundImage = `url(${savedLogo})`;
+    logoBox.style.backgroundSize = "cover";
+    logoBox.style.backgroundPosition = "center";
+    logoBox.textContent = "";
+  }
+
+  const savedCompany = JSON.parse(localStorage.getItem("companyInfo") || "null");
+  if (savedCompany) {
+    companyInputs.forEach(field => {
+      const label = field.previousElementSibling?.textContent;
+      if (!label) return;
+      const savedVal = savedCompany[label];
+      if (!savedVal) return;
+
+      if (field.tagName === "SELECT") {
+        field.value = savedVal;
+      } else if (field.tagName === "TEXTAREA" || field.type === "text") {
+        field.placeholder = savedVal;
+      }
+    });
+
+    if (industrySelect && sizeSelect && companySummary) {
+      const industry = savedCompany["Industry / Sector"] || industrySelect.value;
+      const size = savedCompany["Company Size"] || sizeSelect.value;
+      companySummary.textContent = `${industry} | ${size}`;
+    }
+  }
+
+  const savedRecruit = JSON.parse(localStorage.getItem("recruitPrefs") || "null");
+  if (savedRecruit) {
+    recruitInputs.forEach(field => {
+      const label = field.previousElementSibling?.textContent;
+      if (!label) return;
+      const savedVal = savedRecruit[label];
+      if (!savedVal) return;
+
+      if (field.tagName === "SELECT") {
+        field.value = savedVal;
+      } else {
+        field.placeholder = savedVal;
+      }
+    });
+  }
+
+  const savedSettings = JSON.parse(localStorage.getItem("accountSettings") || "null");
+  if (savedSettings) {
+    if (savedSettings.email) {
+      accountEmailInput.placeholder = savedSettings.email;
+    }
+    if (savedSettings.phone) {
+      accountPhoneInput.placeholder = savedSettings.phone;
+    }
+    notifyApplicants.checked = !!savedSettings.notifyApplicants;
+    notifyMessages.checked = !!savedSettings.notifyMessages;
+    notifySystem.checked = !!savedSettings.notifySystem;
+  }
+});
+
+// Notification & message
+function changeTab(tabName) {
+  document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+  document.querySelectorAll(".tab-content").forEach(tab => tab.classList.remove("active-tab"));
+
+  event.target.classList.add("active");
+  document.getElementById(tabName).classList.add("active-tab");
+}
+// job seeker profile
+// Badges tab (Search and sorting)
+
+// Convert "Issued on DD/MM/YYYY" to timestamp
+function parseBadgeDate(text) {
+  if (!text) return 0;
+
+  const raw = text.replace("Issued on", "").trim();
+  const parts = raw.split("/");
+
+  if (parts.length !== 3) return 0;
+
+  const day = parseInt(parts[0], 10);
+  const month = parseInt(parts[1], 10);
+  const year = parseInt(parts[2], 10);
+
+  if (isNaN(day) || isNaN(month) || isNaN(year)) return 0;
+
+  return new Date(year, month - 1, day).getTime();
+}
+
+function initBadgeSearchSort() {
+  const searchInput = document.getElementById("badgeSearch");
+  const searchBtn = document.getElementById("badgeSearchBtn");
+  const sortInput = document.getElementById("badgeSort");
+  const grid = document.getElementById("badgeGrid");
+
+  // Check if elements exist
+  if (!searchInput || !searchBtn || !sortInput || !grid) {
+    console.warn("Badge search or sort elements not found.");
+    return;
+  }
+
+  // Store original cards
+  const cards = Array.from(grid.querySelectorAll(".badge-card"));
+  if (cards.length === 0) return;
+
+  function updateBadges() {
+    let filtered = [...cards];
+
+    const searchText = searchInput.value.toLowerCase().trim();
+    const sortValue = sortInput.value;
+
+    // Search by card text
+    if (searchText) {
+      filtered = filtered.filter(card =>
+        card.innerText.toLowerCase().includes(searchText)
+      );
+    }
+
+    // Sort by name
+    if (sortValue === "name") {
+      filtered.sort((a, b) => {
+        const nameA = a.querySelector(".badge-title")?.innerText || "";
+        const nameB = b.querySelector(".badge-title")?.innerText || "";
+        return nameA.localeCompare(nameB);
+      });
+    }
+
+    // Sort by date
+    if (sortValue === "date") {
+      filtered.sort((a, b) => {
+        const dateTextA = a.querySelector(".badge-date")?.innerText || "";
+        const dateTextB = b.querySelector(".badge-date")?.innerText || "";
+
+        const da = parseBadgeDate(dateTextA);
+        const db = parseBadgeDate(dateTextB);
+
+        return db - da;
+      });
+    }
+
+    // Render updated cards
+    grid.innerHTML = "";
+    filtered.forEach(card => grid.appendChild(card));
+  }
+
+  // Event listeners
+  sortInput.addEventListener("change", updateBadges);
+  searchBtn.addEventListener("click", updateBadges);
+
+  console.log("Badge search and sort initialized.");
+}
+
+// Auto init when badge grid exists
+document.addEventListener("DOMContentLoaded", () => {
+  if (document.getElementById("badgeGrid")) {
+    initBadgeSearchSort();
+  }
+});
+
+// Function to handle the form submission
+function reviewApplication(event) {
+    event.preventDefault(); // Stop page reload
+
+    // Get values from the form inputs
+    const name = document.getElementById("appName").value;
+    const email = document.getElementById("appEmail").value;
+    const phone = document.getElementById("appPhone").value;
+    const salary = document.getElementById("appSalary").value;
+    const intro = document.getElementById("appIntro").value;
+    
+    // Get Chip Selections
+    // This looks for chips that have the class 'active' inside specific groups
+    const availability = document.querySelector('.work-group .chip.active')?.innerText || "Not selected";
+    
+    // Benefits allows multiple, so we map them to an array
+    const benefitsList = Array.from(document.querySelectorAll('.benefits-group .chip.active'))
+                              .map(chip => chip.innerText)
+                              .join(", ");
+
+    // Build the Review HTML
+    const reviewHTML = `
+        <div class="review-item"><strong>Full Name:</strong> ${name}</div>
+        <div class="review-item"><strong>Email:</strong> ${email}</div>
+        <div class="review-item"><strong>Phone:</strong> ${phone}</div>
+        <div class="review-item"><strong>Expected Salary:</strong> RM ${salary}</div>
+        <div class="review-item"><strong>Availability:</strong> ${availability}</div>
+        <div class="review-item"><strong>Expected Benefits:</strong> ${benefitsList || "None selected"}</div>
+        <div class="review-item"><strong>Introduction:</strong> <br>${intro}</div>
+    `;
+
+    // Inject content and show modal
+    document.getElementById("reviewContent").innerHTML = reviewHTML;
+    document.getElementById("reviewModal").style.display = "flex";
+}
+
+// Final Submit Action
+function finalSubmitApplication() {
+    closeReview();
+    alert("Application submitted successfully! Good luck.");
+    // Redirect to dashboard or view applied jobs
+    window.location.href = "view_applied_jobs.html";
+}
+
+// Chip Selection Logic (Toggle 'active' class)
+document.addEventListener("DOMContentLoaded", () => {
+    const chips = document.querySelectorAll(".chip");
+    chips.forEach(chip => {
+        chip.addEventListener("click", () => {
+            // If it's the work group (single select), remove active from others
+            if (chip.parentElement.classList.contains('work-group')) {
+                chip.parentElement.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+            } else {
+                // Benefits group (multi select)
+                chip.classList.toggle("active");
+            }
+        });
+    });
+});
+
+// delete the posted job
+function deleteJob(id, btn) {
+    const row = btn.closest("tr");
+
+    if (!confirm("Are you sure you want to delete this job?")) return;
+
+    if (!isNaN(id)) {
+        let jobs = JSON.parse(localStorage.getItem("postedJobs") || "[]");
+        jobs.splice(id, 1);
+        localStorage.setItem("postedJobs", JSON.stringify(jobs));
+    }
+
+    row.remove();
+}

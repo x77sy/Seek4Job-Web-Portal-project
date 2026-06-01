@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seek4Job</title>
+  <link rel="stylesheet" href="CSS/employer_style.css">
+</head>
+
+<body class="nav-body">
+  <nav class="top-nav">
+    <div class="left-area">
+      <img src="images/logo.png" alt="Logo" class="logo-img">
+    </div>
+
+    <ul class="center-menu">
+      <li><a href="jobseeker_aboutus.html">About Us</a></li>
+      <li><a href="#" class="active">Dashboard</a></li>
+      <li><a href="jobseeker_profile.html">Profile</a></li>
+      <li><a href="courses-learningmodules.html">Courses</a></li> 
+      <li><a href="mentorship-community.html">Community</a></li>
+    </ul>
+
+    <button class="name-btn" id="nameBtn">Name</button>
+  </nav>
+
+  <div class="dashboard-container">
+
+    <div class="horizontal-menu">
+      <ul class="menu-list-horizontal">
+        <li onclick="location.href='jobseeker_dashboard.html'">Overview</li>
+        <li onclick="location.href='search_job.html'">Jobs Search</li>
+        <li onclick="location.href='saved_jobs.html'">Saved Jobs</li>
+        <li class="active">Apply Job</li>
+        <li onclick="location.href='view_applied_jobs.html'">View Applied Jobs</li>
+        <li onclick="location.href='jobseeker_notification_messages.html'">Notification & Messages</li>
+      </ul>
+    </div>
+
+  <!-- Main content -->
+<div class="main-content dashboard-container">
+  <div class="content-area">
+    <h1 class="page-title">Apply Job</h1>
+
+    <form id="jobForm" onsubmit="return reviewApplication(event)">
+      <div class="two-card-wrapper">
+        <!-- Left card -->
+        <div class="form-card">
+        <h3>Personal Details</h3>
+
+        <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="appName" placeholder="Please enter your full name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" id="appEmail" placeholder="Please enter your email address" required>
+        </div>
+
+        <div class="form-group">
+            <label>Contact Number *</label>
+            <input type="tel" id="appPhone" placeholder="Please enter your contact number start with '+60' " required>
+        </div>
+
+        <div class="form-group">
+            <label>Home Address *</label>
+            <input type="text" id="appAddress" placeholder="Please enter your home address" required>
+        </div>
+
+        <div class="form-group">
+            <label>Birth Date *</label>
+            <input type="date" id="birthDate" name="birthDate" required>
+        </div>
+
+        <div class="form-group">
+            <label>Are you Malaysian? *</label>
+            <div class="radio-group">
+            <label><input type="radio" name="reside" value="No" checked> No</label>
+            <label><input type="radio" name="reside" value="Yes"> Yes</label>
+            </div>
+        </div>
+
+            <h3>Documents</h3>
+            <p>Submit your resume and supporting documents.</p>
+              
+        <div class="form-group">
+            <label for="resumeUpload">Upload Resume (PDF, DOCX)*</label>
+            <input type="file" id="resumeUpload" name="resumeUpload" required accept=".pdf,.doc,.docx">
+        </div>
+
+        <div class="form-group">
+            <label for="coverLetterUpload">Cover Letter (Optional)</label>
+            <input type="file" id="coverLetterUpload" name="coverLetterUpload" accept=".pdf,.doc,.docx">
+        </div>
+
+        <div class="form-group">
+            <label for="portfolioLink">Portfolio URL (Optional)</label>
+            <input type="url" id="portfolioLink" name="portfolioLink" placeholder="https://myportfolio.com">
+        </div>
+
+    </div>
+
+        <!-- Right card -->
+        <div class="form-card">
+        <h3>Company Question</h3>
+
+        <div class="form-group">
+            <label>Introduction *</label>
+            <textarea id="appIntro" placeholder="Write an introduction to introduce yourself within 50 - 100 words" rows="5" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Why are you interested in this role? *</label>
+            <textarea id="appReason" placeholder="Kindly describe within 50 words" rows="5" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>What is your expected salary? *</label>
+            <input type="number" id="appSalary" placeholder="expected salary range" required>
+        </div>
+
+        <div class="form-group">
+            <label>When can you available to work? *</label>
+            <div class="chip-group work-group">
+            <span class="chip active">ASAP</span>
+            <span class="chip">Within One Week</span>
+            <span class="chip">Within One Month</span>
+            <span class="chip">Within Three Months</span>
+            <span class="chip">More Than Three Months</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>What benefits are you expecting? *</label>
+            <div class="chip-group benefits-group">
+            <span class="chip active">Health insurance</span>
+            <span class="chip">Paid time off</span>
+            <span class="chip">Dental insurance</span>
+            <span class="chip">Vision insurance</span>
+            <span class="chip">Flexible schedule</span>
+            <span class="chip">Tuition reimbursement</span>
+            </div>
+        </div>
+        
+        <button type="submit" class="submit-btn submit-bottom">Confirm</button>
+
+      </div>
+    </div>
+  </form>
+
+</div>
+
+  <!-- Review submission details pop-up -->
+  <div class="modal-overlay" id="reviewModal">
+    <div class="review-box">
+      <h2>Review Application</h2>
+
+      <div id="reviewContent"></div>
+
+      <div class="review-actions">
+        <button class="cancel-btn" onclick="closeReview()">Cancel</button>
+        <button class="confirm-submit-btn" onclick="finalSubmitApplication()">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-center">
+      <div class="footer-links">
+                <a href="jobseeker_helpcenter-contactus.html">Help Center & Contact Us</a>
+                <a href="jobseeker_feedback-reportissues.html">Feedback & Report Issue</a>
+      </div>
+      <p>&copy; 2025 Seek4Job. All rights reserved.</p>
+    </div>
+    <a href="index.html" class="logout-btn">Logout</a>
+  </footer>
+
+  <script src="JS/main.js"></script>
+  <script src="JS/jobseeker_script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seek4Job</title>
+  <link rel="stylesheet" href="CSS/employer_style.css">
+</head>
+
+<body class="nav-body">
+  <nav class="top-nav">
+    <div class="left-area">
+      <img src="images/logo.png" alt="Logo" class="logo-img">
+    </div>
+
+    <ul class="center-menu">
+      <li><a href="jobseeker_aboutus.html">About Us</a></li>
+      <li><a href="#" class="active">Dashboard</a></li>
+      <li><a href="jobseeker_profile.html">Profile</a></li>
+      <li><a href="courses-learningmodules.html">Courses</a></li> 
+      <li><a href="mentorship-community.html">Community</a></li>
+    </ul>
+
+    <button class="name-btn" id="nameBtn">Name</button>
+  </nav>
+
+  <div class="dashboard-container">
+
+    <div class="horizontal-menu">
+      <ul class="menu-list-horizontal">
+        <li onclick="location.href='jobseeker_dashboard.html'">Overview</li>
+        <li onclick="location.href='search_job.html'">Jobs Search</li>
+        <li onclick="location.href='saved_jobs.html'">Saved Jobs</li>
+        <li onclick="location.href='apply_job.html'">Apply Job</li>
+        <li class="active">View Applied Jobs</li>
+        <li onclick="location.href='jobseeker_notification_messages.html'">Notification & Messages</li>
+      </ul>
+    </div>
+
+    <div class="main-content applications-container">
+        <h1>My Job Applications</h1>
+        <p>Keep track of your progress and access openings when needed.</p>
+
+      <!-- Applicants table -->
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Applied Position</th>
+              <th>Company Name</th>
+              <th>Applied Date</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="job-title">Full Stack Developer</td>
+              <td>ABC Company</td>
+              <td>22 Nov 2025</td>
+              <td><span class="status active">Pending</span></td>
+              <td>
+                <button onclick="location.href='jobseeker_notification_messages.html?tab=messages'" class="action-btn">Contact</button>
+                <button class="action-btn" onclick="openApplicationView(0)">View</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="job-title">Frontend Developer</td>
+              <td>NextGen Robotics</td>
+              <td>15 Nov 2025</td>
+              <td><span class="status active">Pending</span></td>
+              <td>
+                <button onclick="location.href='jobseeker_notification_messages.html?tab=messages'" class="action-btn">Contact</button>
+                <button class="action-btn" onclick="openApplicationView(0)">View</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="job-title">UI/UX Designer</td>
+              <td>BlueOcean Consulting</td>
+              <td>15 Oct 2025</td>
+              <td><span class="status draft">Shortlisted</span></td>
+              <td>
+                <button onclick="location.href='jobseeker_notification_messages.html?tab=messages'" class="action-btn">Contact</button>
+                <button class="action-btn" onclick="openApplicationView(0)">View</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="job-title">Marketing Intern</td>
+              <td>Pinnacle Financial Advisors</td>
+              <td>30 Sep 2025</td>
+              <td><span class="status expired">Rejected</span></td>
+              <td>
+                <button class="action-btn" onclick="openApplicationView(0)">View</button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+</div>
+
+  <div class="modal-overlay" id="viewModal">
+    <div class="review-box">
+      <h2>Application Details</h2>
+      <div id="viewContent"></div>
+      <div class="review-actions">
+        <button class="cancel-btn" onclick="closeViewModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-center">
+      <div class="footer-links">
+        <a href="jobseeker_helpcenter-contactus.html">Help Center & Contact Us</a>
+        <a href="jobseeker_feedback-reportissues.html">Feedback & Report Issue</a>
+      </div>
+      <p>&copy; 2025 Seek4Job. All rights reserved.</p>
+    </div>
+    <a href="index.html" class="logout-btn">Logout</a>
+  </footer>
+
+  <script src="JS/main.js"></script>
+  <script src="JS/jobseeker_script.js"></script>
+
+</body>
+</html>

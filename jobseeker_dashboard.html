@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seek4Job</title>
+  <link rel="stylesheet" href="CSS/employer_style.css">
+</head>
+
+<body class="nav-body">
+  <nav class="top-nav">
+    <div class="left-area">
+      <img src="images/logo.png" alt="Logo" class="logo-img">
+    </div>
+
+    <ul class="center-menu">
+      <li><a href="jobseeker_aboutus.html">About Us</a></li>
+      <li><a href="#" class="active">Dashboard</a></li>
+      <li><a href="jobseeker_profile.html">Profile</a></li>
+      <li><a href="courses-learningmodules.html">Courses</a></li> 
+      <li><a href="mentorship-community.html">Community</a></li>
+    </ul>
+
+    <button class="name-btn" id="nameBtn">Name</button>
+  </nav>
+
+  <div class="dashboard-container">
+
+    <div class="horizontal-menu">
+      <ul class="menu-list-horizontal">
+        <li onclick="location.href='jobseeker_dashboard.html'">Overview</li>
+        <li onclick="location.href='search_job.html'">Jobs Search</li>
+        <li onclick="location.href='saved_jobs.html'">Saved Jobs</li>
+        <li onclick="location.href='apply_job.html'">Apply Job</li>
+        <li onclick="location.href='view_applied_jobs.html'">View Applied Jobs</li>
+        <li class="active">Notification & Messages</li>
+      </ul>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="main-content comms-container">
+
+      <h1 class="page-title">Inbox</h1>
+
+      <!-- Tabs -->
+      <div class="inbox-tabs">
+        <button class="tab-btn active" onclick="openTab(event, 'notifications')">Notifications</button>
+        <button class="tab-btn" onclick="openTab(event, 'messages')">Messages</button>
+      </div>
+
+      <!-- Notifications List -->
+      <div id="notifications" class="tab-content active-tab">
+        <div class="notif-card highlight">
+          <p><strong>Application Viewed:</strong> Your application for <strong>Business Analyst</strong> at Tech Solutions Inc. was viewed.</p><span class="notif-time">10 minutes ago</span>
+        </div>
+
+        <div class="notif-card">
+          <p><strong>Interview Invitation:</strong> You have been invited for an interview for the <strong>Software Engineer</strong> role.</p><span class="notif-time">2 hours ago</span>
+        </div>
+
+        <div class="notif-card">
+          <p><strong>Job expiring soon:</strong> Your listing <strong>Marketing Executive</strong> will expire in 3 days.</p><span class="notif-time">Yesterday</span>
+        </div>
+
+        <div class="notif-card">
+          <p><strong>New Job Alert:</strong> A new job matching your profile: <strong>Data Analyst</strong> at FinanceCorp.</p><span class="notif-time">3 days ago</span>
+        </div>
+
+        <div class="notif-card">
+          <p><strong>Application Status Update:</strong> Unfortunately, your application for <strong>DevOps Engineer</strong> was not successful.</p><span class="notif-time">1 weeks ago</span>
+        </div>
+      </div>
+
+      <!-- Messages -->
+      <div id="messages" class="tab-content">
+
+        <div class="notif-card highlight">
+          <p><strong>Sarah Lee (Recruiter at Tech Solutions):</strong> Hi, may I check if the interview can be scheduled next Monday?</p><span class="notif-time">1 hour ago</span>
+        </div>
+
+        <div class="notif-card">
+          <p><strong>John Wong (HR at FinanceCorp):</strong> Could you please resubmit your resume again? Thank you.</p><span class="notif-time">3 days ago</span>
+        </div>
+
+        <div class="notif-card">
+          <p><strong>System:</strong> Your profile has reached 20 views for this month.</p><span class="notif-time">1 month ago</span>
+        </div>
+      </div>
+    </div>
+
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-center">
+      <div class="footer-links">
+                <a href="jobseeker_helpcenter-contactus.html">Help Center & Contact Us</a>
+                <a href="jobseeker_feedback-reportissues.html">Feedback & Report Issue</a>
+      </div>
+      <p>&copy 2025 Seek4Job. All rights reserved.</p>
+    </div>
+    <a href="index.html" class="logout-btn">Logout</a>
+  </footer>
+
+  <script src="JS/main.js"></script>
+  <script src="JS/employer_script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (location.search.includes("tab=messages")) {
+        const msgBtn = document.querySelectorAll('.tab-btn')[1];
+        openTab({ target: msgBtn }, 'messages');
+      }
+    });
+  </script>
+
+</body>
+</html>

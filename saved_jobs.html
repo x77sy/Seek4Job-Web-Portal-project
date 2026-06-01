@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seek4Job</title>
+  <link rel="stylesheet" href="CSS/employer_style.css">
+</head>
+<body>
+
+  <!-- Top navigation -->
+  <nav class="top-nav">
+    <div class="left-area">
+      <img src="images/logo.png" class="logo-img">
+    </div>
+
+    <ul class="center-menu">
+      <li><a href="employer_aboutus.html">About Us</a></li>
+      <li><a href="#" class="active">Dashboard</a></li>
+      <li><a href="employer_profile.html">Profile</a></li>
+    </ul>
+
+    <button class="name-btn" id="nameBtn">Name</button>
+  </nav>
+
+  <!-- Employer menu -->
+  <div class="horizontal-menu">
+    <ul class="menu-list-horizontal">
+      <li onclick="location.href='employer_dashboard.html'">Overview</li>
+      <li class="active">Post Job</li>
+      <li onclick="location.href='view_posted_job.html'">View Posted Job</li>
+      <li onclick="location.href='view_applicant.html'">View Applicant</li>
+      <li onclick="location.href='employer_notification_messages.html'">Notification & Messages</li>
+    </ul>
+  </div>
+
+  <!-- Main content -->
+<div class="main-content dashboard-container">
+  <div class="content-area">
+    <h1 class="page-title">Post a Job</h1>
+
+    <form id="jobForm" onsubmit="return validateAndReview(event)">
+      <div class="two-card-wrapper">
+        <!-- Left card -->
+        <div class="form-card">
+
+        <div class="form-group">
+            <label>Job Title *</label>
+            <input type="text" placeholder="Full Stack Developer" required>
+        </div>
+
+        <div class="form-group">
+            <label>Which option best describes this job’s location? *</label>
+            <select required>
+            <option value="">-- Select --</option>
+            <option>Remote</option>
+            <option>On-site</option>
+            <option>Hybrid</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Are employees required to reside in a specific location? *</label>
+            <div class="radio-group">
+            <label><input type="radio" name="reside" value="No" checked> No</label>
+            <label><input type="radio" name="reside" value="Yes"> Yes</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>What is the job type? *</label>
+            <div class="chip-group job-type-group">
+            <span class="chip active">Full-time</span>
+            <span class="chip">Part-time</span>
+            <span class="chip">Contract</span>
+            <span class="chip">Temporary</span>
+            <span class="chip">Internship</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>What is the schedule for this job? *</label>
+            <div class="chip-group schedule-group">
+            <span class="chip active">4 hour shift</span>
+            <span class="chip">8 hour shift</span>
+            <span class="chip">10 hour shift</span>
+            <span class="chip">12 hour shift</span>
+            <span class="chip">Monday to Friday</span>
+            <span class="chip">Day shift</span>
+            <span class="chip">Night shift</span>
+            <span class="chip">Evening shift</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>What is the pay? *</label>
+
+            <div class="two-column">
+              <div>
+                  <label>Show pay by *</label>
+                  <select required>
+                  <option value="">-- Select --</option>
+                  <option>Range</option>
+                  </select>
+              </div>
+
+              <div>
+                  <label>Rate *</label>
+                  <select required>
+                  <option value="">-- Select --</option>
+                  <option>per year</option>
+                  <option>per month</option>
+                  <option>per hour</option>
+                  </select>
+              </div>
+
+              <div>
+                  <label>Minimum *</label>
+                  <input type="number" placeholder="$ 70,000" required>
+              </div>
+            </div>
+        </div>
+
+        </div>
+
+        <!-- Right card -->
+        <div class="form-card">
+
+        <div class="form-group">
+            <div class="two-column">
+              <div>
+                  <label>Maximum *</label>
+                  <input type="number" placeholder="$ 170,000" required>
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Do you offer supplemental pay? *</label>
+            <div class="chip-group supplemental-group">
+            <span class="chip active">Signing bonus</span>
+            <span class="chip">Commission pay</span>
+            <span class="chip">Bonus pay</span>
+            <span class="chip">Tips</span>
+            <span class="chip">Other</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Are any benefits offered? *</label>
+            <div class="chip-group benefits-group">
+            <span class="chip active">Health insurance</span>
+            <span class="chip">Paid time off</span>
+            <span class="chip">Dental insurance</span>
+            <span class="chip">Vision insurance</span>
+            <span class="chip">Flexible schedule</span>
+            <span class="chip">Tuition reimbursement</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>How many people to hire? *</label>
+            <select required>
+            <option value="">-- Select --</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>How quickly do you need to hire? *</label>
+            <select required>
+            <option value="">-- Select --</option>
+            <option>More than 4 weeks</option>
+            <option>Within 2 weeks</option>
+            <option>Within 1 week</option>
+            <option>Immediately</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Job Description *</label>
+            <textarea placeholder="Describe the role, responsibilities, and requirements..." rows="5" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn submit-bottom">Confirm</button>
+
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+  <!-- Review submission details pop-up -->
+  <div class="modal-overlay" id="reviewModal">
+    <div class="review-box">
+      <h2>Review Job Posting</h2>
+
+      <div id="reviewContent"></div>
+
+      <div class="review-actions">
+        <button class="cancel-btn" onclick="closeReview()">Cancel</button>
+        <button class="confirm-submit-btn" onclick="finalSubmit()">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-center">
+      <div class="footer-links">
+        <a href="employer_helpcenter-contactus.html">Help Center & Contact Us</a>
+        <a href="employer_feedback-reportissues.html">Feedback & Report Issue</a>
+      </div>
+      <p>&copy 2025 Seek4Job. All rights reserved.</p>
+    </div>
+    <a href="index.html" class="logout-btn">Logout</a>
+  </footer>
+
+  <script src="JS/main.js"></script>
+  <script src="JS/employer_script.js"></script>
+
+</body>
+</html>

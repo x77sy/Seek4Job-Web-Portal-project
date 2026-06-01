@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Applicant Resume - Jason Lim</title>
+  <link rel="stylesheet" href="CSS/employer_style.css">
+</head>
+
+<body class="nav-body">
+
+  <!-- Top navigation bar -->
+  <nav class="top-nav">
+    <img src="images/logo.png" class="logo-img">
+
+    <ul class="center-menu">
+      <li><a href="aboutus.html">About Us</a></li>
+      <li><a class="active" href="employer_dashboard.html">Dashboard</a></li>
+      <li><a href="employer_profile.html">Profile</a></li>
+    </ul>
+
+        <button class="name-btn" id="nameBtn">Name</button>
+  </nav>
+
+  <div class="dashboard-container">
+
+    <!-- Horizontal menu -->
+    <div class="horizontal-menu">
+      <ul class="menu-list-horizontal">
+        <li onclick="location.href='employer_dashboard.html'">Overview</li>
+        <li onclick="location.href='post_job.html'">Post Job</li>
+        <li onclick="location.href='view_posted_job.html'">View Posted Job</li>
+        <li class="active" onclick="location.href='view_applicant.html'">View Applicant</li>
+        <li onclick="location.href='notification_messages.html'">Notification & Messages</li>
+      </ul>
+    </div>
+
+    <!-- Content -->
+    <div class="content-area">
+    <div class="main-content dashboard-container">
+      <h1 class="page-title">Applicant Resume</h1>
+
+      <div class="resume-card">
+        <div class="resume-header">
+          <div class="resume-main-info">
+            <h2 class="resume-name">Jason Lim</h2>
+            <p class="resume-role">UI/UX Designer</p>
+          </div>
+          <div class="resume-contact">
+            <p>jason.lim@example.com</p>
+            <p>+6016 789 2345</p>
+            <p>Petaling Jaya, Malaysia</p>
+          </div>
+        </div>
+
+        <!-- Profile -->
+        <div class="resume-section">
+          <h3 class="resume-section-title">Profile</h3>
+          <p class="resume-text">
+            UI/UX Designer focused on creating clean, user-friendly interfaces for web and 
+            mobile. Comfortable with user research, wireframing, prototyping and working 
+            closely with developers to ship usable products.
+          </p>
+        </div>
+
+        <!-- Skills -->
+        <div class="resume-section">
+          <h3 class="resume-section-title">Skills</h3>
+          <ul class="resume-list">
+            <li>Wireframing &amp; Prototyping (Figma, Adobe XD)</li>
+            <li>User Flows &amp; Information Architecture</li>
+            <li>Usability Testing (basic)</li>
+            <li>Visual Design &amp; Layout</li>
+            <li>Design Systems &amp; Components</li>
+            <li>Basic HTML &amp; CSS</li>
+          </ul>
+        </div>
+
+        <!-- Experience -->
+        <div class="resume-section">
+          <h3 class="resume-section-title">Experience</h3>
+
+          <p class="resume-item-title">UI/UX Intern — PixelCraft Studio</p>
+          <p class="resume-item-sub">May 2023 – Aug 2023</p>
+          <ul class="resume-list">
+            <li>Created low- and high-fidelity wireframes for client web projects using Figma.</li>
+            <li>Collaborated with developers to ensure designs were feasible and consistent.</li>
+            <li>Assisted with simple usability tests and gathered user feedback for iteration.</li>
+          </ul>
+        </div>
+
+        <!-- Education -->
+        <div class="resume-section">
+          <h3 class="resume-section-title">Education</h3>
+          <p class="resume-item-title">Bachelor of Multimedia (Interaction Design)</p>
+          <p class="resume-item-sub">Multimedia University — 2019–2023</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-center">
+      <div class="footer-links">
+        <a href="employer_helpcenter-contactus.html">Help Center & Contact Us</a>
+        <a href="employer_feedback-reportissues.html">Feedback & Report Issue</a>
+      </div>
+      <p>&copy 2025 Seek4Job</p>
+    </div>
+    <a href="index.html" class="logout-btn">Logout</a>
+  </footer>
+
+  <script src="JS/main.js"></script>
+  <script src="JS/employer_script.js"></script>
+
+</body>
+</html>

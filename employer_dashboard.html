@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seek4Job</title>
+  <link rel="stylesheet" href="CSS/jobseeker_style.css">
+</head>
+
+<body class="nav-body">
+  <nav class="top-nav">
+    <div class="left-area">
+      <img src="images/logo.png" alt="Logo" class="logo-img">
+    </div>
+
+    <ul class="center-menu">
+      <li><a href="jobseeker_aboutus.html">About Us</a></li>
+      <li><a href="#" class="active">Dashboard</a></li>
+      <li><a href="jobseeker_profile.html">Profile</a></li>
+      <li><a href="courses-learningmodules.html">Courses</a></li> 
+      <li><a href="mentorship-community.html">Community</a></li>
+    </ul>
+
+    <button class="name-btn" id="nameBtn">Name</button>
+  </nav>
+
+  <div class="page-container">
+
+    <div class="dashboard-container">
+
+      <div class="horizontal-menu">
+        <ul class="menu-list-horizontal">
+          <li class="active">Overview</li>
+          <li onclick="location.href='search_job.html'">Jobs Search</li>
+          <li onclick="location.href='saved_jobs.html'">Saved Jobs</li>
+          <li onclick="location.href='apply_job.html'">Apply Job</li>
+          <li onclick="location.href='view_applied_jobs.html'">View Applied Jobs</li>
+          <li onclick="location.href='jobseeker_notification_messages.html'">Notification & Messages</li>
+        </ul>
+      </div>
+
+      <div class="main-content dashboard-container">
+        <h1>Welcome back!</h1>
+
+        <div class="dashboard-widgets">       
+          <div class="widget-card">
+            <h3>Applied Jobs</h3>
+            <p class="widget-count">12</p>
+            <a href="view_applied_jobs.html">View Status</a>
+          </div>
+          <div class="widget-card">
+            <h3>Saved Jobs</h3>
+            <p class="widget-count">8</p>
+            <a href="saved_jobs.html">View Saved</a>
+          </div>
+          <div class="widget-card">
+            <h3>New Messages</h3>
+            <p class="widget-count highlight-orange">3 New</p>
+            <a href="jobseeker_notification_messages.html">View All</a>
+          </div>
+          <div class="widget-card">
+            <h3>My Courses</h3>
+            <p class="widget-count">2 Active</p>
+            <a href="courses-learningmodules.html">View Progress</a>
+          </div>
+        </div>
+
+        <div class="dashboard-sections dashboard-container">
+
+          <!-- Quick Actions -->
+            <div class="section-shortcut">
+              <h2>Quick Actions</h2>
+                <button onclick="location.href='search_job.html'" class="action-btn main-action">Start Job Search</button>
+                <button onclick="location.href='apply_job.html'" class="action-btn">Update Resume</button>
+            </div>
+
+          <!-- Recent Activity -->
+            <div class="section-recent">
+                <h2>Recent Activity</h2>
+                <ul class="activity-list">
+                  <li>Applied for <strong>Frontend Developer</strong> at Tech Co. <span class="date">Today</span></li>
+                  <li>Saved <strong>UX Designer</strong> role at Creative Inc <span class="date">3 days ago</span></li>
+                  <li>New message from <strong>Recruiter John</strong>. <span class="date">5 days ago</span></li>
+                </ul>
+            </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-center">
+      <div class="footer-links">
+                <a href="jobseeker_helpcenter-contactus.html">Help Center & Contact Us</a>
+                <a href="jobseeker_feedback-reportissues.html">Feedback & Report Issue</a>
+      </div>
+      <p>&copy; 2025 Seek4Job. All rights reserved.</p>
+    </div>
+    <a href="index.html" class="logout-btn">Logout</a>
+  </footer>
+
+  <script src="JS/main.js"></script>
+  <script src="JS/employer_script.js"></script>
+
+</body>
+</html>

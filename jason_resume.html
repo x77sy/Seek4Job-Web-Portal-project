@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentorship & Community</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body class="nav-body">
+
+        <!-- 🔹 NAVIGATION BAR -->
+          <nav class="top-nav">
+              <div class="left-area">
+              <img src="images/logo.png" alt="Logo" class="logo-img">
+              </div>
+
+              <ul class="center-menu">
+              <li><a href="jobseeker_aboutus.html">About Us</a></li>
+              <li><a href=jobseeker_dashboard.html>Dashboard</a></li>
+              <li><a href="jobseeker_profile.html">Profile</a></li>
+              <li><a href="courses-learningmodules.html">Courses</a></li> 
+              <li><a href="#" class="active">Community</a></li>
+              </ul>
+
+              <button class="name-btn" id="nameBtn">Name</button>
+          </nav>
+  <main class="container">
+
+        <!-- Page Header -->
+          <header class="page-header" aria-labelledby="pageTitle">
+            <h1 id="pageTitle">Mentorship & Community</h1>
+          </header>
+
+          <div class="community-layout-grid">
+
+        <!-- LEFT SIDEBAR -->
+          <aside class="community-sidebar-left">
+            <button class="community-sidebar-btn active" data-target="communityPanel">Community Space</button>
+            <button class="community-sidebar-btn" data-target="mentorPanel">Find a Mentor</button>
+          </aside>
+
+        <!-- CONTENT COLUMN -->
+          <section class="content-column">
+        
+        <!-- Mentor Panel -->
+          <div id="mentorPanel" class="panel">
+            <h2>Find a Mentor</h2>
+            <img src="images/mentor.jpg" alt="Find a Mentor">
+            <p class="mentor-description">
+                  Having trouble with your courses or study? Don’t worry—we’ve got your back! Search for mentors who can guide you, give tips, and help you survive the learning jungle. 🦁📚
+            </p>
+            <div class="search-row">
+              <label for="mentorKeyword">Search Keyword:</label>
+              <input type="text" id="mentorKeyword" placeholder="Enter course name or skill">
+            <button id="findMentorBtn" class="btn-primary">Find</button>
+            </div>
+            <div id="mentorResults" class="mentor-grid"></div>
+          </div>
+
+        <!-- COMMUNITY PANEL -->
+          <div id="communityPanel" class="panel active">
+            <h2>Community Board</h2>
+            <img src="images/community.jpg" alt="Community Board">
+            <p class="community-desc">
+              Welcome to the public community space! Share your thoughts, ideas, tips, worries,
+              memes, or anything friendly with the whole student community. 🎉📝
+            </p>
+
+        <!-- Post Box -->
+          <div class="post-box">
+            <textarea id="postText" placeholder="Write something for everyone..."></textarea>
+            <button id="postBtn" class="btn-primary">Post</button>
+          </div>
+
+        <!-- Posts Display -->
+          <div id="postsContainer" class="posts-area"></div>
+        </div>
+
+      </section>
+
+    </div>
+</main>
+        <!-- 🔹 FOOTER -->
+          <footer class="site-footer">
+            <div class="footer-center">
+              <div class="footer-links">
+                <a href="jobseeker_helpcenter-contactus.html">Help Center & Contact Us</a>
+                <a href="jobseeker_feedback-reportissues.html">Feedback & Report Issue</a>
+              </div>
+              <p>&copy 2025 Seek4Job. All rights reserved.</p>
+            </div>
+
+            <a href="index.html" class="logout-btn">Logout</a>
+          </footer>
+
+    <script src="JS/main.js" defer></script>
+    <script>if(document.getElementById('mentorPanel')) initMentorshipPage();</script>
+</body>
+</html>

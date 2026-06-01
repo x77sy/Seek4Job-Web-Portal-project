@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Learning Catalog — Seek4Job</title>
+  <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body class="nav-body">
+
+    <!-- 🔹 NAVIGATION BAR -->
+    <nav class="top-nav">
+        <div class="left-area">
+        <img src="images/logo.png" alt="Logo" class="logo-img">
+        </div>
+
+        <ul class="center-menu">
+        <li><a href="jobseeker_aboutus.html">About Us</a></li>
+        <li><a href="jobseeker_dashboard.html">Dashboard</a></li>
+        <li><a href="jobseeker_profile.html">Profile</a></li>
+        <li><a href="#" class="active">Courses</a></li> 
+        <li><a href="mentorship-community.html">Community</a></li>
+        </ul>
+
+        <button class="name-btn" id="nameBtn">Name</button>
+    </nav>
+
+  <main class="container">
+
+    <header class="page-header" aria-labelledby="pageTitle">
+      <h1 id="pageTitle">Learning Catalog</h1>
+    </header>
+
+    <div class="layout-grid">
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar-left">
+        <section class="search">
+            <div class="search-wrap">
+            <input id="searchInput" type="search" placeholder="Search for courses" />
+            <button id="findJobsBtn" class="btn small">Find Jobs</button>
+            </div>
+        </section>
+
+        <section class="filters">
+          <h4>Filters</h4>
+
+          <div class="filter-block">
+            <strong>Category</strong>
+            <div><label><input type="checkbox" name="cat" value="All" checked> All</label></div>
+            <div id="categoryFilters"></div>
+          </div>
+
+          <div class="filter-block">
+            <strong>Difficulty</strong>
+            <div><label><input type="checkbox" name="diff" value="Beginner" checked> Beginner</label></div>
+            <div><label><input type="checkbox" name="diff" value="Intermediate" checked> Intermediate</label></div>
+            <div><label><input type="checkbox" name="diff" value="Advanced" checked> Advanced</label></div>
+          </div>
+
+          <div class="filter-block">
+            <strong>Skill</strong>
+            <div id="skillFilters"></div>
+          </div>
+        </section>
+      </aside>
+
+      <!-- COURSES COLUMN -->
+      <section class="courses-column">
+        <div id="coursesContainer" class="courses-grid">
+          <!-- JS will generate ALL course cards here -->
+        </div>
+      </section>
+    
+
+    <!-- BADGES SECTION -->
+    <aside class="sidebar-right">
+    <section class="badges-section">
+      <h4>In-Progress Courses</h4>
+    <div id="inProgressContainer" class="badges-list"></div>
+  </section>
+  <section class="badges-section">
+    <h4>Completed Courses</h4>
+    <div id="completedContainer" class="badges-list"></div>
+  </section>
+</aside>
+</div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-overlay" data-dismiss="modal"></div>
+
+    <div class="modal-panel" role="document">
+        <header class="modal-header">
+        <h2 id="modalTitle"></h2>
+        </header>
+
+        <div class="modal-body">
+        <div id="modalThumb" class="modal-thumb">
+        </div>
+        <p id="modalMeta" class="muted"></p>
+        <p id="modalDesc"></p>
+        <p id="modalDetails"></p>
+        <div id="modalSkills" class="skills-row"></div>
+        <p id="modalCertificate"></p>
+        <div id="modalExtraInfo"></div>
+        </div>
+
+        <footer class="modal-footer">
+        <button id="modalBackBtn" class="btn ghost">Back</button>
+        </footer>
+    </div>
+    </div>
+  </main>
+
+  <!-- 🔹 FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-center">
+      <div class="footer-links">
+                <a href="jobseeker_helpcenter-contactus.html">Help Center & Contact Us</a>
+                <a href="jobseeker_feedback-reportissues.html">Feedback & Report Issue</a>
+      </div>
+      <p>&copy 2025 Seek4Job. All rights reserved.</p>
+    </div>
+
+    <a href="index.html" class="logout-btn">Logout</a>
+  </footer>
+
+  <!-- JS -->
+  <script src="JS/main.js" defer></script>
+  <script> if(document.getElementById('coursesContainer')) initCoursesPage();</script>
+</body>
+</html>
